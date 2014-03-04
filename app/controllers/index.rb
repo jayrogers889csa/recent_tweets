@@ -12,11 +12,15 @@ end
 #POST ==================================
 
 post '/tweet' do
+  # content_type :json
   input = params[:tweet]
-  $client.update(input)
+  # binding.pry
 
-  redirect '/tweet'
-
+  if $client.update(input)
+    erb :success, :layout => false
+  else
+    erb :failed, :layout => false
+  end
 end
 
 
