@@ -3,6 +3,23 @@ get '/' do
   erb :index
 end
 
+get '/tweet' do
+  erb :tweet
+end
+
+
+
+#POST ==================================
+
+post '/tweet' do
+  input = params[:tweet]
+  $client.update(input)
+
+  redirect '/tweet'
+
+end
+
+
 post '/:username' do
 
   username = "@" + params[:username].gsub(/^@/, '')
@@ -17,3 +34,7 @@ post '/:username' do
     erb :no_user, :layout => false
   end
 end
+
+
+
+
