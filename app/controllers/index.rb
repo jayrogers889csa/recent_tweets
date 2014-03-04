@@ -5,13 +5,15 @@ end
 
 post '/:username' do
 
-  @user = TwitterUser.find_or_create_by(username: params[:username])
+  username = "@" + params[:username].gsub(/^@/, '')
 
-  @user = @user.tweets_stale?
+  @user = TwitterUser.find_or_create_by(username: username)
 
-  if request.xhr?
+  @filtered_user = @user.tweets_stale?
+
+  if @filtered_user && request.xhr?
     erb :display_tweets, :layout => false
   else
-    redirect '/'
+    erb :no_user, :layout => false
   end
 end

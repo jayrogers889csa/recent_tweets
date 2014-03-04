@@ -49,3 +49,4 @@ $client = Twitter::REST::Client.new do |config|
   config.access_token = ENV['OAUTH_TOKEN']
   config.access_token_secret = ENV['OAUTH_TOKEN_SECRET']
 end
+
